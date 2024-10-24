@@ -1,0 +1,358 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f0f0f0;
+
+}
+h1 {
+    color: darkred;
+    text-align: center; /* Centra el título principal */
+}
+
+
+.details {
+    text-align: left;
+    margin: 20px auto;
+    width: 80%;
+}
+.section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+.section img {
+    width: 300px;
+    height: 300px;
+    border-radius: 10px;
+    margin-left: 20px;
+}
+ul {
+    list-style: none;
+    padding: 0;
+}
+ul li {
+    padding: 5px 0;
+}
+section {
+    display: flex;
+    width: 600px;
+    height: 430px;
+    position: relative;
+}
+section img {
+    width: 0px;
+    flex-grow: 1;
+    object-fit: cover;
+    opacity: .8;
+    transition: .5s ease;
+}
+section img:hover {
+    cursor: crosshair;
+    width: 300px;
+    opacity: 1;
+    filter: contrast(120%);
+}
+
+/* Estilos para el nombre del jugador */
+.player-name {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    font-size: 16px;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+/* Muestra el nombre del jugador al hacer hover */
+section img:hover + .player-name {
+    opacity: 1;
+}
+
+/* Estilos de la tarjeta */
+.card {
+    width: 600px;
+    aspect-ratio: 1 / 0.7;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+}
+.card .image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.5s ease-in-out;
+}
+.card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 2px solid white;
+    border-radius: inherit;
+    opacity: 0;
+    transition: 0.4s ease-in-out;
+}
+.card .content {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: white;
+    opacity: 0;
+    transition: 0.5s ease-in-out;
+}
+.card .content h2 {
+    margin: 0;
+    transform: scale(0.8);
+    transition: 0.5s ease-in-out;
+}
+.card .content p {
+    transform: translateY(20px);
+    transition: 0.5s ease-in-out;
+}
+.card:hover img {
+    filter: grayscale(1) brightness(0.4);
+}
+.card:hover::after {
+    opacity: 1;
+}
+.card:hover .content {
+    opacity: 1;
+}
+.card:hover .content h2 {
+    transform: scale(1);
+    opacity: 1;
+}
+.card:hover .content p {
+    transform: translateY(0);
+    opacity: 1;
+}
+.slider {
+    position: relative;
+    width: 600px; /* Ancho del carrusel */
+    height: 400px; /* Alto del carrusel */
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+input[type="radio"] {
+    display: none; /* Ocultar los botones de radio */
+}
+
+.slides {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.slide {
+    min-width: 100%; /* Cada slide ocupa el 100% del carrusel */
+    height: 100%;
+}
+
+.slide img {
+    width: 100%; /* Imagen ocupa el 100% del slide */
+    height: 100%;
+    object-fit: cover; /* Mantener proporción */
+}
+
+.navigation {
+    position: absolute;
+    bottom: 10px; /* Espaciado desde el fondo */
+    left: 50%; /* Centrar la navegación */
+    transform: translateX(-50%); /* Ajuste para centrar */
+    display: flex;
+    gap: 10px; /* Espaciado entre los botones */
+}
+
+.nav-button {
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 5px;
+    cursor: pointer; /* Cambiar cursor a mano */
+}
+
+input#slide1:checked ~ .slides {
+    transform: translateX(0); /* Mostrar primer slide */
+}
+
+input#slide2:checked ~ .slides {
+    transform: translateX(-100%); /* Mostrar segundo slide */
+}
+
+input#slide3:checked ~ .slides {
+    transform: translateX(-200%); /* Mostrar tercer slide */
+}
+/* Botón brutalista */
+.brutalist-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  width: 169px;
+  height: 60px;
+  background-color: #000;
+  color: #fff;
+  text-decoration: none;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  border: 3px solid #fff;
+  outline: 3px solid #000;
+  box-shadow: 6px 6px 0 #00a4ef;
+  transition: all 0.1s ease-out;
+  padding: 0 15px;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+
+.brutalist-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.8),
+    transparent
+  );
+  z-index: 1;
+  transition: none;
+  opacity: 0;
+}
+
+@keyframes slide {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.brutalist-button:hover::before {
+  opacity: 1;
+  animation: slide 2s infinite;
+}
+
+.brutalist-button:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 10px 10px 0 #000;
+  background-color: #000;
+  color: #fff;
+}
+
+.brutalist-button:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0px 0px 0 #00a4ef;
+  background-color: #fff;
+  color: #000;
+  border-color: #000;
+}
+
+.button-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+  transition: transform 0.2s ease-out;
+  position: relative;
+  z-index: 1;
+}
+
+.brutalist-button:hover .button-text {
+  transform: skew(-5deg);
+}
+
+.brutalist-button:active .button-text {
+  transform: skew(5deg);
+}
+
+.button-text span:first-child {
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.button-text span:last-child {
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+/* Contenedor centrado */
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: left;
+    height: 10vh; /* Altura completa de la ventana */
+}
+.pascua {
+    padding: 10px 40px;
+    font-size: 18px;
+    background-color: #333;
+    color: #fff;
+    text-shadow: 0 2px 0 rgb(0 0 0 / 25%);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border: 0;
+    z-index: 1;
+    user-select: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    white-space: unset;
+    padding: .8rem 1.5rem;
+    text-decoration: none;
+    font-weight: 900;
+    transition: all 0.7s cubic-bezier(0,.8,.26,.99);
+  }
+  
+  .pascua:before {
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    content: '';
+    transition: .7s cubic-bezier(0,.8,.26,.99);
+    z-index: -1;
+    background-color: #333!important;
+    box-shadow: 0 -4px rgb(0 0 0 / 50%) inset, 0 4px rgb(255 255 255 / 20%) inset, -4px 0 rgb(255 255 255 / 20%) inset, 4px 0 rgb(0 0 0 / 50%) inset;
+  }
+  
+  .pascua:after {
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    content: '';
+    box-shadow: 0 4px 0 0 rgb(0 0 0 / 15%);
+    transition: .7s cubic-bezier(0,.8,.26,.99);
+  }
+  
+  .pascua:hover:before {
+    box-shadow: 0 -4px rgb(0 0 0 / 50%) inset, 0 4px rgb(255 255 255 / 20%) inset, -4px 0 rgb(255 255 255 / 20%) inset, 4px 0 rgb(0 0 0 / 50%) inset;
+  }
+  
+  .pascua:hover:after {
+    box-shadow: 0 4px 0 0 rgb(0 0 0 / 15%);
+  }
+  
+  .pascua:active {
+    transform: translateY(4px);
+  }
+  
+  b.pascua:active:after {
+    box-shadow: 0 0px 0 0 rgb(0 0 0 / 15%);
+  }
